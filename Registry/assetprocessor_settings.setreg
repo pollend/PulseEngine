@@ -1,0 +1,18 @@
+{
+    "Amazon": {
+        "AssetProcessor": {
+            "Settings": {
+                "ScanFolder PulseEngine/Assets": {
+                    "watch": "@GEMROOT:PulseEngine@/Assets",
+                    "recursive": 1,
+                    "order": 101
+                },
+                "ScanFolder PulseEngine/Registry": {
+                    "watch": "@GEMROOT:PulseEngine@/Registry",
+                    "recursive": 1,
+                    "order": 102
+                }
+            }
+        }
+    }
+}
