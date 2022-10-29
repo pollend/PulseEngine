@@ -6,6 +6,7 @@
 
 namespace PulseEngine
 {
+
     class PulseEngineRequests
     {
     public:

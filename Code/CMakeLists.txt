@@ -1,4 +1,3 @@
-
 # Currently we are in the Code folder: ${CMAKE_CURRENT_LIST_DIR}
 # Get the platform specific folder ${pal_dir} for the current folder: ${CMAKE_CURRENT_LIST_DIR}/Platform/${PAL_PLATFORM_NAME}
 # Note: o3de_pal_dir will take care of the details for us, as this may be a restricted platform
@@ -11,6 +10,14 @@ o3de_pal_dir(pal_dir ${CMAKE_CURRENT_LIST_DIR}/Platform/${PAL_PLATFORM_NAME} "${
 # traits for this platform. Traits for a platform are defines for things like whether or not something in this gem
 # is supported by this platform.
 include(${pal_dir}/PAL_${PAL_PLATFORM_NAME_LOWERCASE}.cmake)
+
+find_package(Pulse REQUIRED)
+if (NOT Pulse_FOUND)
+   message(FATAL_ERROR "requires the development headers for PulseEngine.")
+endif()
+
+set_target_properties(Pulse::PulseEngine PROPERTIES 
+    IMPORTED_GLOBAL TRUE)
 
 # The ${gem_name}.API target declares the common interface that users of this gem should depend on in their targets
 ly_add_target(
@@ -25,6 +32,7 @@ ly_add_target(
     BUILD_DEPENDENCIES
         INTERFACE
            AZ::AzCore
+           Pulse::PulseEngine
 )
 
 # The ${gem_name}.Private.Object target is an internal target
@@ -45,7 +53,10 @@ ly_add_target(
         PUBLIC
             AZ::AzCore
             AZ::AzFramework
+            Pulse::PulseEngine
 )
+# ly_target_link_libraries(${gem_name}.Private.Object PRIVATE Pulse::PulseEngine)
+
 
 # Here add ${gem_name} target, it depends on the Private Object library and Public API interface
 ly_add_target(
@@ -64,7 +75,11 @@ ly_add_target(
             Gem::${gem_name}.API
         PRIVATE
             Gem::${gem_name}.Private.Object
+    # RUNTIME_DEPENDENCIES
+    #     Pulse::PulseEngine
 )
+# target_link_libraries(Gem::${gem_name} Pulse::PulseEngine)
+
 
 # By default, we will specify that the above target ${gem_name} would be used by
 # Client and Server type targets when this gem is enabled.  If you don't want it
