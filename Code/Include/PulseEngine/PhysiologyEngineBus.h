@@ -1,20 +1,24 @@
 #pragma once
 
 #include <AzCore/Component/ComponentBus.h>
-namespace PulseEngine {
+namespace PulseEngine
+{
 
-class PhysiologyEvents : public AZ::EntityComponentBus {
-public:
-  AZ_RTTI(PhysiologyEvents, "{DF79B555-D9E9-489A-8A00-AD39C564E258}");
+    class PhysiologyEvents : public AZ::ComponentBus
+    {
+    public:
+        AZ_RTTI(PhysiologyEvents, "{DF79B555-D9E9-489A-8A00-AD39C564E258}");
 
-  // static const AZ::EBusHandlerPolicy HandlerPolicy =
-  // AZ::EBusHandlerPolicy::MultipleAndOrdered;
+        virtual void OnSimulationTimeStep(double simTime);
 
-  virtual void OnSimulationTimeStep(float deltaTime, float simTime);
+        virtual void OnSimulationReady();
+    };
 
-  virtual void OnPatientDeath(float deltaTime, float simTime);
-};
+    using PhysiologyNotificationBus = AZ::EBus<PhysiologyEvents>;
 
-using PhysiologyNotificationEBus = AZ::EBus<PhysiologyEvents>;
+    class PhysiologyEngineRequest : public AZ::ComponentBus
+    {
+    };
+    using PhysiologyEngineRequestBus = AZ::EBus<PhysiologyEngineRequest>;
 
 } // namespace PulseEngine

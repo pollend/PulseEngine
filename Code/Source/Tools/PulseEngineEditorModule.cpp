@@ -1,6 +1,8 @@
 
 #include <PulseEngineModuleInterface.h>
+
 #include "PulseEngineEditorSystemComponent.h"
+// #include "EditorPhysiologyEngineComponent.h"
 
 namespace PulseEngine
 {
@@ -19,6 +21,7 @@ namespace PulseEngine
             // This happens through the [MyComponent]::Reflect() function.
             m_descriptors.insert(m_descriptors.end(), {
                 PulseEngineEditorSystemComponent::CreateDescriptor(),
+                // EditorPhysiologyEngineComponent::CreateDescriptor()
             });
         }
 

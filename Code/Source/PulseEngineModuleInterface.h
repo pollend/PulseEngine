@@ -1,7 +1,9 @@
 
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/Module/Module.h>
+
 #include <Clients/PulseEngineSystemComponent.h>
+#include <Clients/PhysiologyEngineComponent.h>
 
 namespace PulseEngine
 {
@@ -20,6 +22,7 @@ namespace PulseEngine
             // This happens through the [MyComponent]::Reflect() function.
             m_descriptors.insert(m_descriptors.end(), {
                 PulseEngineSystemComponent::CreateDescriptor(),
+                PhysiologyEngineComponent::CreateDescriptor()
                 });
         }
 

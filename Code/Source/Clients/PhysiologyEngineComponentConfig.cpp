@@ -1,5 +1,6 @@
-#include "PhysiologyEnginComponentConfig.h"
 #include "AzCore/RTTI/RTTI.h"
+
+#include "PhysiologyEngineComponentConfig.h"
 
 namespace PulseEngine {
 

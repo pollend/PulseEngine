@@ -3,12 +3,15 @@
 #include <AzCore/Component/Component.h>
 #include <AzCore/base.h>
 
-#include "PhysiologyEnginComponentConfig.h"
+#include "AzCore/Component/ComponentBus.h"
+#include "PhysiologyEngineComponentConfig.h"
 #include <AzCore/Component/TickBus.h>
 
 namespace PulseEngine {
 
-class PhysiologyEngineComponentController : public AZ::TickBus::Handler {
+class PhysiologyEngineComponentController : 
+  public AZ::TickBus::Handler,
+  public PhysiologyEngineRequestBus::Handler {
 public:
     AZ_TYPE_INFO(PhysiologyEngineComponentController,
                 "{FF36A760-7CB9-4C91-BFA1-A6094804E564}");
@@ -23,7 +26,7 @@ public:
     const PhysiologyEngineComponentConfig& GetConfiguration() const;
     
     void Init();
-    void Activate(AZ::EntityId entityId);
+    void Activate(AZ::EntityComponentIdPair entityId);
     void Deactivate();
 protected:
 
@@ -33,10 +36,13 @@ protected:
 private:
   AZ_DISABLE_COPY(PhysiologyEngineComponentController);
 
-    PhysiologyEngineComponentConfig m_config;
+  PhysiologyEngineComponentConfig m_config;
 
-  AZStd::unique_ptr<PhysiologyEngine> m_pulseEngine;
-  AZStd::unique_ptr<LoggerForward> m_pulseLogger;
+  AZStd::unique_ptr<PhysiologyEngine> m_pulseEngine = nullptr;
+  AZStd::unique_ptr<LoggerForward> m_pulseLogger = nullptr;
+  double m_TimeStep_s = 0;
+  double m_CurrentTime_s = 0;
+  AZ::EntityComponentIdPair m_entityId;
 };
 
 } // namespace PulseEngine

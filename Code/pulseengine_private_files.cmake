@@ -5,8 +5,8 @@ set(FILES
     Source/Clients/PulseEngineSystemComponent.h
     Source/Clients/PhysiologyEngineComponent.cpp
     Source/Clients/PhysiologyEngineComponent.h
-    Source/Clients/PhysiologyEnginComponentConfig.h
-    Source/Clients/PhysiologyEnginComponentConfig.cpp
+    Source/Clients/PhysiologyEngineComponentConfig.h
+    Source/Clients/PhysiologyEngineComponentConfig.cpp
     Source/Clients/PhysiologyEngineComponentController.cpp
     Source/Clients/PhysiologyEngineComponentController.h
 )
