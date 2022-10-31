@@ -55,7 +55,6 @@ ly_add_target(
             AZ::AzFramework
             Pulse::PulseEngine
 )
-# ly_target_link_libraries(${gem_name}.Private.Object PRIVATE Pulse::PulseEngine)
 
 
 # Here add ${gem_name} target, it depends on the Private Object library and Public API interface
@@ -75,8 +74,7 @@ ly_add_target(
             Gem::${gem_name}.API
         PRIVATE
             Gem::${gem_name}.Private.Object
-    # RUNTIME_DEPENDENCIES
-    #     Pulse::PulseEngine
+            Pulse::PulseEngine
 )
 # target_link_libraries(Gem::${gem_name} Pulse::PulseEngine)
 
@@ -144,6 +142,7 @@ if(PAL_TRAIT_BUILD_HOST_TOOLS)
                 Gem::${gem_name}.Editor.API
             PRIVATE
                 Gem::${gem_name}.Editor.Private.Object
+                Pulse::PulseEngine
     )
 
     # By default, we will specify that the above target ${gem_name} would be used by

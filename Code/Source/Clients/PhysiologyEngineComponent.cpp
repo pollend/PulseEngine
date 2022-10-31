@@ -1,24 +1,15 @@
-
-#pragma once
-
 #include "PhysiologyEngineComponent.h"
-#include "AzCore/Component/Component.h"
+#include <AzCore/Component/Component.h>
 
 namespace PulseEngine {
 
-    void PhysiologyEngineComponent::Reflect(AZ::ReflectContext* context)
-    {
-
-    }
-    
-    void PhysiologyEngineComponent::Activate()
-    {
-
+    void PhysiologyEngineComponent::Reflect(AZ::ReflectContext *context) {
+        PhysiologyEngineComponentBase::Reflect(context);
     }
 
-    void PhysiologyEngineComponent::Deactivate()
+    PhysiologyEngineComponent::PhysiologyEngineComponent(const PhysiologyEngineComponentConfig& config) :
+        PhysiologyEngineComponentBase(config)
     {
-
     }
 
-}
+} // namespace PulseEngine

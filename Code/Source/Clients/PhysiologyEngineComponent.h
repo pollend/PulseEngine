@@ -1,28 +1,30 @@
 #pragma once
 
-#include <AzCore/std/smart_ptr/unique_ptr.h>
+#include <AzFramework/Components/ComponentAdapter.h>
+
 #include <AzCore/Component/Component.h>
+#include <AzCore/std/smart_ptr/unique_ptr.h>
 
-#include <cdm/PhysiologyEngine.h>
+#include "PhysiologyEngineComponentController.h"
 
-namespace PulseEngine 
-{
-    class PhysiologyEngineComponent : 
-        public AZ::Component 
-    {
-    public:
-        AZ_COMPONENT(PulseEngineComponent, "{E13A67CA-50BC-4C04-A502-DD62BDE8BDB7}",
-                    AZ::Component)
-        static void Reflect(AZ::ReflectContext* context);
+class LoggerForward;
+class PhysiologyEngine;
 
-        PulseEngineComponent() = default;
-        // PulseEngineComponent(const PulseEngineComponent &component);
+namespace PulseEngine {
 
-    private:
-        // AZ::Component ...
-        void Activate() override;
-        void Deactivate() override;
+using PhysiologyEngineComponentBase = AzFramework::Components::ComponentAdapter<PhysiologyEngineComponentController, PhysiologyEngineComponentConfig>;
+class PhysiologyEngineComponent : public PhysiologyEngineComponentBase {
+public:
+  AZ_COMPONENT(PhysiologyEngineComponent,
+               "{E13A67CA-50BC-4C04-A502-DD62BDE8BDB7}", AZ::Component)
+  static void Reflect(AZ::ReflectContext *context);
 
-        AZStd::unique_ptr<PhysiologyEngine> m_pulseEngine;
-    };
+  PhysiologyEngineComponent() = default;
+  explicit PhysiologyEngineComponent(const PhysiologyEngineComponentConfig& config);
+
+protected:
+private:
+
+};
+
 } // namespace PulseEngine
